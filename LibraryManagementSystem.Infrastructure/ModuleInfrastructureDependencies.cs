@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LibraryManagementSystem.Infrastructure.Context;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LibraryManagementSystem.Infrastructure
 {
@@ -6,6 +7,8 @@ namespace LibraryManagementSystem.Infrastructure
     {
         public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection service)
         {
+            service.AddSingleton<DapperContext>();
+
             return service;
         }
     }
