@@ -15,6 +15,17 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
                    .UseIdentityColumn();
 
             builder.Property(g => g.Name)
+                   .HasColumnName("GenreName")
+                   .HasMaxLength(20);
+
+            builder.Property(g => g.Description)
+                   .HasColumnName("GenreDescription")
+                   .HasMaxLength(150);
+
+            builder.Property(g => g.AverageRating).HasPrecision(18, 2);
+
+
+            builder.Property(g => g.Name)
                    .HasColumnName("GenreName");
 
             builder.Property(g => g.Description)

@@ -17,6 +17,16 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
             builder.HasIndex(b => b.ISPN).IsUnique();
             builder.HasIndex(b => b.Title);
 
+            builder.Property(b => b.Title)
+                .HasColumnName("Title")
+                .IsRequired()
+                .HasMaxLength(30);
+
+            builder.Property(b => b.Summary)
+                .HasColumnName("Summary")
+                .IsRequired()
+                .HasMaxLength(800);
+
             //## BOOK - AUTHOR -> ONE - MANY ##//
             builder
                 .HasOne(b => b.Author)

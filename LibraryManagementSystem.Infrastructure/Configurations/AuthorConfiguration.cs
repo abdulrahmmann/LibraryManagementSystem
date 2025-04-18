@@ -17,9 +17,9 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
 
             builder.HasIndex(b => b.Name);
 
-            builder.Property(a => a.Name).HasColumnName("AuthorName");
+            builder.Property(a => a.Name).HasColumnName("AuthorName").HasMaxLength(30);
 
-            builder.Property(a => a.Biography).HasColumnName("AuthorBiography");
+            builder.Property(a => a.Biography).HasColumnName("AuthorBiography").HasMaxLength(300);
 
             builder.Property(a => a.Nationality).HasColumnName("AuthorNationality");
 

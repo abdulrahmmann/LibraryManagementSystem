@@ -15,7 +15,8 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
                    .UseIdentityColumn();
 
             builder.Property(p => p.Name)
-                   .HasColumnName("PublisherName");
+                   .HasColumnName("PublisherName")
+                   .HasMaxLength(30);
 
             builder.Property(p => p.Email)
                    .HasColumnName("PublisherEmail");
