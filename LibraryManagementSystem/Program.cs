@@ -1,3 +1,5 @@
+using LibraryManagementSystem.Application;
+using LibraryManagementSystem.Infrastructure;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services
+       .AddInfrastructureDependencies()
+       .AddAppDependencies();
 
 var app = builder.Build();
 
