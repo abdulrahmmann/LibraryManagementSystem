@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 namespace LibraryManagementSystem.Domain.Entities
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<int>
     {
         public DateOnly JoinedDate { get; private set; }
 

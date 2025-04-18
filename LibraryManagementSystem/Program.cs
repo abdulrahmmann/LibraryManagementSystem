@@ -25,7 +25,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 });
 
 // REGISTER IDENTITY
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders();
 
@@ -57,7 +57,20 @@ builder.Services
        .AddAppDependencies();
 
 var app = builder.Build();
-
+// Temporary test
+Console.WriteLine("=== Testing DbContext Creation ===");
+try
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+    db.Database.OpenConnection(); // Explicitly test connection
+    db.Database.CloseConnection();
+    Console.WriteLine("DbContext created successfully!");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"DbContext creation failed: {ex.ToString()}");
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

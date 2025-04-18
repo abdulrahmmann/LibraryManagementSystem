@@ -25,7 +25,7 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
                 .HasForeignKey(br => br.BookId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasIndex(br => br.Title); throw new NotImplementedException();
+            builder.HasIndex(br => br.Title);
         }
     }
 }

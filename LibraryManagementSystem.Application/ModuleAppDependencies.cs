@@ -14,8 +14,6 @@ namespace LibraryManagementSystem.Application
             // Register Mapster
             service.AddMapster();
 
-            // Configure Mapster
-
             return service;
         }
     }
