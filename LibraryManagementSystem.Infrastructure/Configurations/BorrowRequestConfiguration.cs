@@ -21,10 +21,10 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
                 .HasForeignKey(br => br.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //## BookCopy  - BORROWREQUEST ##//
-            builder.HasOne(br => br.Copy)
-                .WithMany(u => u.BorrowRequests)
-                .HasForeignKey(br => br.BookCopyId)
+            //## BOOK  - BORROWREQUEST ##//
+            builder.HasOne(br => br.Book)
+                .WithMany(u => u.BorrowRequest)
+                .HasForeignKey(br => br.BookId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(br => br.BorrowedDate);

@@ -34,6 +34,8 @@
         public int PublisherId { get; private set; }
         public Publisher Publisher { get; private set; } = new();
 
+        public ICollection<BorrowRequest> BorrowRequest { get; private set; } = [];
+
         //******************** RELATIONS ********************//
     }
 }
