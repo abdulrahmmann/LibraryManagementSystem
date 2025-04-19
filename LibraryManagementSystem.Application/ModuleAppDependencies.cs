@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using LibraryManagementSystem.Application.Features.AuthorFeature.Validators;
+using LibraryManagementSystem.Application.Mapping;
 using LibraryManagementSystem.Application.UOF;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,10 @@ namespace LibraryManagementSystem.Application
 
             // Register Mapster
             service.AddMapster();
+            AuthorMapping.Configure();
+
+            var config = TypeAdapterConfig.GlobalSettings;
+            config.Scan(AppDomain.CurrentDomain.GetAssemblies());
 
 
             // Register FluentValidation

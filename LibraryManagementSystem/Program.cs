@@ -58,6 +58,7 @@ builder.Services
 
 var app = builder.Build();
 // Temporary test
+/*
 Console.WriteLine("=== Testing DbContext Creation ===");
 try
 {
@@ -71,6 +72,7 @@ catch (Exception ex)
 {
     Console.WriteLine($"DbContext creation failed: {ex.ToString()}");
 }
+*/
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
