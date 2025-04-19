@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="MediatR" Version="12.5.0" />
@@ -16,6 +18,30 @@
   <ItemGroup>
     <ProjectReference Include="..\LibraryManagementSystem.Domain\LibraryManagementSystem.Domain.csproj" />
     <ProjectReference Include="..\LibraryManagementSystem.Infrastructure\LibraryManagementSystem.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\AuthorFeature\Commands\" />
+    <Folder Include="Features\AuthorFeature\Queries\" />
+    <Folder Include="Features\BookFeature\Commands\" />
+    <Folder Include="Features\BookFeature\Queries\" />
+    <Folder Include="Features\BookFeature\Validators\" />
+    <Folder Include="Features\BookReviewFeature\Commands\" />
+    <Folder Include="Features\BookReviewFeature\DTOs\" />
+    <Folder Include="Features\BookReviewFeature\Queries\" />
+    <Folder Include="Features\BookReviewFeature\Validators\" />
+    <Folder Include="Features\GenreFeature\Commands\" />
+    <Folder Include="Features\GenreFeature\DTOs\" />
+    <Folder Include="Features\GenreFeature\Queries\" />
+    <Folder Include="Features\GenreFeature\Validators\" />
+    <Folder Include="Features\PublisherFeature\Commands\" />
+    <Folder Include="Features\PublisherFeature\DTOs\" />
+    <Folder Include="Features\PublisherFeature\Queries\" />
+    <Folder Include="Features\PublisherFeature\Validators\" />
+    <Folder Include="Features\UserFeature\Commands\" />
+    <Folder Include="Features\UserFeature\DTOs\" />
+    <Folder Include="Features\UserFeature\Queries\" />
+    <Folder Include="Features\UserFeature\Validators\" />
   </ItemGroup>
 
 </Project>
