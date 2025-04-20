@@ -21,17 +21,15 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         }
         #endregion
 
-        public async Task<IEnumerable<Author>> GetAuthorsByNameAsync(string Name)
+        public async Task<Author> GetAuthorByNameAsync(string Name)
         {
-            return await _dbContext.Author
-                .Where(a => a.Name.Contains(Name, StringComparison.OrdinalIgnoreCase))
-                .ToListAsync();
+            return await _dbContext.Author.SingleOrDefaultAsync(a => a.Name.ToLower() == Name.ToLower());
         }
 
         public async Task<IEnumerable<Author>> GetAuthorsByNationalityAsync(string Nationality)
         {
             return await _dbContext.Author
-                .Where(a => a.Nationality.Equals(Nationality, StringComparison.OrdinalIgnoreCase))
+                .Where(a => a.Nationality.ToLower() == Nationality.ToLower())
                 .ToListAsync();
         }
         public async Task AddAuthorAsync(Author Author)
@@ -47,6 +45,13 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public void RemoveAuthor(int Id)
         {
             _dbContext.Author.Remove(_dbContext.Author.Find(Id));
+        }
+
+        public bool IsExist(string Name)
+        {
+            var authors = _dbContext.Author.AsQueryable().Where(a => a.Name.Equals(Name));
+
+            return authors.Any() ? true : false;
         }
     }
 }

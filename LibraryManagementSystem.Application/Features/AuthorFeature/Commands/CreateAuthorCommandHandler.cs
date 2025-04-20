@@ -42,6 +42,15 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
                     return BaseResponse<bool>.ErrorResponse("Request AuthorDTO cannot be null!");
                 }
 
+                var isExist = _unitOfWork.AuthorRepository.IsExist(request.AuthorDTO.Name);
+
+                if (isExist)
+                {
+                    _logger.LogWarning("Author with Name: {Name} already exists", request.AuthorDTO.Name);
+
+                    return BaseResponse<bool>.ConflictResponse($"Author with Name: {request.AuthorDTO.Name} Is Already Exist!!");
+                }
+
                 _logger.LogInformation("Handling CreateAuthor with Name: {Name}", request.AuthorDTO.Name);
 
                 var validationResult = await _validator.ValidateAsync(request.AuthorDTO, cancellationToken);

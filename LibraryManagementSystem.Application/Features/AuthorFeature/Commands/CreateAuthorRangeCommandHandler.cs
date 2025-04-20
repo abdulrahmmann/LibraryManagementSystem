@@ -41,6 +41,17 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
                     return BaseResponse<bool>.ErrorResponse("AuthorDTOs cannot be null or empty.");
                 }
 
+                foreach (var author in request.AuthorDTOs)
+                {
+                    var isExist = _unitOfWork.AuthorRepository.IsExist(author.Name);
+                    if (isExist)
+                    {
+                        _logger.LogWarning("Author with Name: {Name} already exists", author.Name);
+
+                        return BaseResponse<bool>.ConflictResponse($"Author with Name: {author.Name} Is Already Exist!!");
+                    }
+                }
+
                 _logger.LogInformation("Handling creation of multiple authors.");
 
                 var validationErrors = new List<string>();

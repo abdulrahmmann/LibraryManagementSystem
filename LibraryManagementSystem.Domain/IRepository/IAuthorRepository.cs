@@ -6,7 +6,7 @@ namespace LibraryManagementSystem.Domain.IRepository
     public interface IAuthorRepository : IGenericRepository<Author>
     {
         #region GET METHODS
-        public Task<IEnumerable<Author>> GetAuthorsByNameAsync(string Name);
+        public Task<Author> GetAuthorByNameAsync(string Name);
         public Task<IEnumerable<Author>> GetAuthorsByNationalityAsync(string Nationality);
         #endregion
 
@@ -25,5 +25,7 @@ namespace LibraryManagementSystem.Domain.IRepository
         #region PUT METHODS
 
         #endregion
+
+        public bool IsExist(string Name);
     }
 }
