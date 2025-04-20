@@ -8,6 +8,8 @@ namespace LibraryManagementSystem.Domain.IRepository
         #region GET METHODS
         public Task<Author> GetAuthorByNameAsync(string Name);
         public Task<IEnumerable<Author>> GetAuthorsByNationalityAsync(string Nationality);
+
+        public IQueryable<Author> FilterAuthorByName(string Name);
         #endregion
 
 

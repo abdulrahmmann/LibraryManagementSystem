@@ -47,6 +47,14 @@ namespace LibraryManagementSystem.Api.Controllers
             return NewResult(result);
         }
 
+        [HttpGet("FilterAuthorByName")]
+        public async Task<IActionResult> FilterAuthorByName(string Name)
+        {
+            var result = await Mediator.Send(new FilterAuthorByNameQuery(Name));
+
+            return NewResult(result);
+        }
+
         [HttpGet("GetAuthorByNationality")]
         public async Task<IActionResult> GetAuthorByNationality(string Nationality)
         {

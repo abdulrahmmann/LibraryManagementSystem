@@ -56,7 +56,7 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while creating authors.");
+                _logger.LogError(ex, "An error occurred while Retrieving authors.");
 
                 return BaseResponse<AuthorDTO>.InternalServerErrorResponse("An unexpected error occurred.");
             }

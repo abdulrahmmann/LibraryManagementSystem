@@ -21,6 +21,16 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         }
         #endregion
 
+        public IQueryable<Author> FilterAuthorByName(string Name)
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return _dbContext.Author;
+            }
+
+            return _dbContext.Author.Where(a => EF.Functions.Like(a.Name, $"%{Name}%"));
+        }
+
         public async Task<Author> GetAuthorByNameAsync(string Name)
         {
             return await _dbContext.Author.SingleOrDefaultAsync(a => a.Name.ToLower() == Name.ToLower());
