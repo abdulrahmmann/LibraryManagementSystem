@@ -16,6 +16,8 @@ namespace LibraryManagementSystem.Application.Common
 
         public List<string> Errors { get; set; } = [];
 
+        public string? Email { get; set; }
+
         public AuthResponse(string token, bool result, string message, HttpStatusCode httpStatusCode)
         {
             Token = token;
@@ -23,6 +25,12 @@ namespace LibraryManagementSystem.Application.Common
             Message = message;
             HttpStatusCode = httpStatusCode;
             Timestamp = DateTime.UtcNow;
+        }
+
+        public AuthResponse(string token, string email, bool result, string message, HttpStatusCode httpStatusCode)
+            : this(token, result, message, httpStatusCode)
+        {
+            Email = email;
         }
     }
 }

@@ -55,7 +55,6 @@ namespace LibraryManagementSystem.Application.Features.UserFeature.Commands
             }
         }
 
-
         private string GenerateJwtToken(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();

@@ -41,5 +41,31 @@ namespace LibraryManagementSystem.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO passwordDTO)
+        {
+            var result = await _mediator.Send(new ForgotPasswordCommand(passwordDTO));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO passwordDTO)
+        {
+            var result = await _mediator.Send(new ResetPasswordCommand(passwordDTO));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(result);
+        }
     }
 }
