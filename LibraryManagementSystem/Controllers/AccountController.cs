@@ -28,5 +28,18 @@ namespace LibraryManagementSystem.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("LoginUser")]
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserDTO userDTO)
+        {
+            var result = await _mediator.Send(new LoginUserCommand(userDTO));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(result);
+        }
     }
 }

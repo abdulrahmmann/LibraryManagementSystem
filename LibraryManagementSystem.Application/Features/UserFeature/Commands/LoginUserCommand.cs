@@ -4,5 +4,5 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.UserFeature.Commands
 {
-    public record LoginUserCommand(LoginUserDTO UserDTO) : IRequest<BaseResponse<bool>>;
+    public record LoginUserCommand(LoginUserDTO UserDTO) : IRequest<AuthResponse>;
 }
