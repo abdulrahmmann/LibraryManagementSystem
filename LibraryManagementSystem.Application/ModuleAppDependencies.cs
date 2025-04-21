@@ -19,6 +19,7 @@ namespace LibraryManagementSystem.Application
             // Register Mapster
             service.AddMapster();
             AuthorMapping.Configure();
+            UserMapping.Configure();
 
             var config = TypeAdapterConfig.GlobalSettings;
             config.Scan(AppDomain.CurrentDomain.GetAssemblies());

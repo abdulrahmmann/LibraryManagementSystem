@@ -10,14 +10,12 @@ namespace LibraryManagementSystem.Infrastructure.Repository
     {
         #region
         private readonly ApplicationContext _dbContext;
-        private readonly DapperContext _dapperContext;
         #endregion
 
         #region
-        public AuthorRepository(ApplicationContext dbContext, DapperContext dapperContext) : base(dbContext)
+        public AuthorRepository(ApplicationContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
-            _dapperContext = dapperContext;
         }
         #endregion
 
@@ -39,7 +37,7 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public async Task<IEnumerable<Author>> GetAuthorsByNationalityAsync(string Nationality)
         {
             return await _dbContext.Author
-                .Where(a => a.Nationality.ToLower() == Nationality.ToLower())
+                .Where(a => a.Nationality.Trim().ToLower() == Nationality.Trim().ToLower())
                 .ToListAsync();
         }
         public async Task AddAuthorAsync(Author Author)

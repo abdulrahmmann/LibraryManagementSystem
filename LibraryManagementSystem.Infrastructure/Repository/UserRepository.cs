@@ -10,22 +10,20 @@ namespace LibraryManagementSystem.Infrastructure.Repository
     {
         #region Field Instance
         private readonly ApplicationContext _dbContext;
-        private readonly DapperContext _dapperContext;
         #endregion
 
 
         #region Inject Instances Into Constructor
-        public UserRepository(ApplicationContext dbContext, DapperContext dapperContext) : base(dbContext)
+        public UserRepository(ApplicationContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
-            _dapperContext = dapperContext;
         }
         #endregion
 
         public async Task<IEnumerable<User>> GetUserByCountryAsync(string Country)
         {
             return await _dbContext.Users
-                .Where(a => a.Country.ToLower() == Country.ToLower())
+                .Where(a => a.Country.Trim().ToLower() == Country.Trim().ToLower())
                 .ToListAsync();
         }
 
@@ -37,8 +35,17 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public async Task<IEnumerable<User>> GetUserByNameAsync(string Name)
         {
             return await _dbContext.Users
-                .Where(a => a.UserName!.ToLower().Contains(Name.ToLower()))
+                .Where(a => a.UserName!.Trim().ToLower().Contains(Name.Trim().ToLower()))
                 .ToListAsync();
+        }
+        public IQueryable<User> FilterUserByName(string Name)
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return _dbContext.Users;
+            }
+
+            return _dbContext.Users.Where(u => EF.Functions.Like(u.UserName, $"%{Name}%"));
         }
 
         public async Task<User> GetUserByPhoneNumberAsync(string PhoneNumber)
@@ -59,6 +66,14 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public void RemoveUser(int Id)
         {
             _dbContext.Users.Remove(_dbContext.Users.Find(Id));
+        }
+
+        public bool IsExist(string UserName, string Email)
+        {
+            var authors = _dbContext.Users.AsQueryable()
+                .Where(u => u.UserName!.Equals(UserName) && u.Email!.Equals(Email));
+
+            return authors.Any() ? true : false;
         }
     }
 }

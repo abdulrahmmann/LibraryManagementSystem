@@ -29,6 +29,8 @@ builder.Services.AddIdentity<User, IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationContext>()
     .AddDefaultTokenProviders();
 
+
+
 // ADDING AUTHENTICATION
 builder.Services.AddAuthentication(options =>
 {
@@ -50,6 +52,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
     };
 });
+
 
 // REGISTER LAYERS DEPENDENCIES
 builder.Services

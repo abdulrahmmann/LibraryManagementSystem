@@ -36,8 +36,6 @@
     <Folder Include="Features\PublisherFeature\DTOs\" />
     <Folder Include="Features\PublisherFeature\Queries\" />
     <Folder Include="Features\PublisherFeature\Validators\" />
-    <Folder Include="Features\UserFeature\Commands\" />
-    <Folder Include="Features\UserFeature\DTOs\" />
     <Folder Include="Features\UserFeature\Queries\" />
     <Folder Include="Features\UserFeature\Validators\" />
   </ItemGroup>

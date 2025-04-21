@@ -10,6 +10,8 @@ namespace LibraryManagementSystem.Domain.IRepository
         public Task<User> GetUserByEmailAsync(string Email);
         public Task<User> GetUserByPhoneNumberAsync(string PhoneNumber);
         public Task<IEnumerable<User>> GetUserByCountryAsync(string Country);
+
+        public IQueryable<User> FilterUserByName(string Name);
         #endregion
 
 
@@ -27,5 +29,7 @@ namespace LibraryManagementSystem.Domain.IRepository
         #region PUT METHODS
 
         #endregion
+
+        public bool IsExist(string UserName, string Email);
     }
 }
