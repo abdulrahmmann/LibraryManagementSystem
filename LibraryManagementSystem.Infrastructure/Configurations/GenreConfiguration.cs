@@ -24,7 +24,6 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
 
             builder.Property(g => g.AverageRating).HasPrecision(18, 2);
 
-
             builder.Property(g => g.Name)
                    .HasColumnName("GenreName");
 

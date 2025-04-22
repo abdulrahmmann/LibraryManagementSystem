@@ -5,6 +5,7 @@ using LibraryManagementSystem.Application.UOF;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using LibraryManagementSystem.Application.Features.GenreFeature.Validators;
 using LibraryManagementSystem.Application.Features.PublisherFeature.Validators;
 
 namespace LibraryManagementSystem.Application
@@ -16,21 +17,20 @@ namespace LibraryManagementSystem.Application
             // Register MediatR
             service.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-
             // Register Mapster
             service.AddMapster();
             AuthorMapping.Configure();
             UserMapping.Configure();
             PublisherMapping.Configure();
+            GenreMapping.Configure();
 
             var config = TypeAdapterConfig.GlobalSettings;
             config.Scan(AppDomain.CurrentDomain.GetAssemblies());
 
-
             // Register FluentValidation
             service.AddValidatorsFromAssemblyContaining<AuthorValidator>();
             service.AddValidatorsFromAssemblyContaining<PublisherValidator>();
-
+            service.AddValidatorsFromAssemblyContaining<GenreValidator>();
 
             // REGISTER UNIT OF WORK
             service.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -40,5 +40,12 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         {
             _dbContext.Genre.Remove(_dbContext.Genre.Find(Id));
         }
+        
+        public bool IsExist(string Name)
+        {
+            var publisher = _dbContext.Publisher.AsQueryable().Where(a => a.Name.Equals(Name));
+
+            return publisher.Any() ? true : false;
+        }
     }
 }

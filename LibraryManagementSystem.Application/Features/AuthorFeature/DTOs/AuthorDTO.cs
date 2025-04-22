@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagementSystem.Application.Features.AuthorFeature.DTOs
 {
-    public class AuthorDTO
+    public  sealed class AuthorDTO
     {
         public string Name { get; set; } = string.Empty;
 
