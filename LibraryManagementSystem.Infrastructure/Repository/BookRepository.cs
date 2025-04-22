@@ -10,15 +10,13 @@ namespace LibraryManagementSystem.Infrastructure.Repository
     {
         #region Field Instance
         private readonly ApplicationContext _dbContext;
-        private readonly DapperContext _dapperContext;
         #endregion
 
 
         #region Inject Instances Into Constructor
-        public BookRepository(ApplicationContext dbContext, DapperContext dapperContext) : base(dbContext)
+        public BookRepository(ApplicationContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
-            _dapperContext = dapperContext;
         }
         #endregion
 
@@ -30,17 +28,17 @@ namespace LibraryManagementSystem.Infrastructure.Repository
 
         public async Task<Book> GetBookByIspn(string ISPN)
         {
-            return await _dbContext.Book.SingleOrDefaultAsync(x => x.ISPN == ISPN);
+            return await _dbContext.Book.SingleOrDefaultAsync(x => x.ISPN.Equals(ISPN));
         }
 
         public async Task<Book> GetBookByPublishedDate(string PublishedDate)
         {
-            return await _dbContext.Book.SingleOrDefaultAsync(x => x.PublishedDate.ToString() == PublishedDate);
+            return await _dbContext.Book.SingleOrDefaultAsync(x => x.PublishedDate.ToString().Equals(PublishedDate));
         }
 
         public async Task<Book> GetBookByTitle(string Title)
         {
-            return await _dbContext.Book.SingleOrDefaultAsync(x => x.Title == Title);
+            return await _dbContext.Book.SingleOrDefaultAsync(x => x.Title.Equals(Title));
         }
 
         public async Task AddBookAsync(Book Book)
@@ -51,6 +49,13 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public async Task AddBookRangeAsync(IEnumerable<Book> Books)
         {
             await _dbContext.Book.AddRangeAsync(Books);
+        }
+
+        public bool IsExistingBook(string Title)
+        {
+            var isExisting = _dbContext.Book.Any(b => b.Title.Equals(Title));
+            
+            return isExisting? true : false;
         }
     }
 }

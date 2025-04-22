@@ -1,4 +1,6 @@
-﻿namespace LibraryManagementSystem.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LibraryManagementSystem.Domain.Entities
 {
     public class Author
     {
@@ -16,7 +18,7 @@
 
 
         //## ******************** RELATIONS ******************** ##//
-        public ICollection<Book> Books { get; set; } = [];
+        public ICollection<Book> Books { get; private set; } = [];
 
         //## ******************** RELATIONS ******************** ##//
     }

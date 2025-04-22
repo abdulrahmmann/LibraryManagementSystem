@@ -27,5 +27,7 @@ namespace LibraryManagementSystem.Domain.IRepository
         #region PUT METHODS
 
         #endregion
+        
+        public bool IsExistingBook(string Title);
     }
 }
