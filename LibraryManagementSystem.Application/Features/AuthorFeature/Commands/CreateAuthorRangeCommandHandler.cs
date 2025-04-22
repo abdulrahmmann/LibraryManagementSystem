@@ -34,7 +34,7 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
         {
             try
             {
-                if (request.AuthorDTOs == null || !request.AuthorDTOs.Any())
+                if (request?.AuthorDTOs == null || !request.AuthorDTOs.Any())
                 {
                     _logger.LogWarning("AuthorDTOs is null or empty.");
 

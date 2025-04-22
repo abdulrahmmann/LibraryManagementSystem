@@ -18,7 +18,6 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
         private readonly IValidator<AuthorDTO> _validator;
         #endregion
 
-
         #region INJECT INSTANCES INTO CONSTRUCTOR
         public CreateAuthorCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
             ILogger<CreateAuthorCommandHandler> logger, IValidator<AuthorDTO> validator)
@@ -37,9 +36,9 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
             {
                 if (request.AuthorDTO == null)
                 {
-                    _logger.LogWarning("AuthorDTO is null");
+                    _logger.LogWarning("request can not be null!");
 
-                    return BaseResponse<bool>.ErrorResponse("Request AuthorDTO cannot be null!");
+                    return BaseResponse<bool>.ErrorResponse("request can not be null!");
                 }
 
                 var isExist = _unitOfWork.AuthorRepository.IsExist(request.AuthorDTO.Name);
@@ -50,8 +49,6 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
 
                     return BaseResponse<bool>.ConflictResponse($"Author with Name: {request.AuthorDTO.Name} Is Already Exist!!");
                 }
-
-                _logger.LogInformation("Handling CreateAuthor with Name: {Name}", request.AuthorDTO.Name);
 
                 var validationResult = await _validator.ValidateAsync(request.AuthorDTO, cancellationToken);
 

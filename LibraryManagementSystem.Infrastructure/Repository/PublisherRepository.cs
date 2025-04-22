@@ -21,19 +21,38 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         }
         #endregion
 
+        public IQueryable<Publisher> FilterPublishersByName(string Name)
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return _dbContext.Publisher;
+            }
+
+            return _dbContext.Publisher.Where(p => EF.Functions.Like(Name, $"%{p.Name}%"));
+        }
+
+        public IQueryable<Publisher> FilterPublishersByEmail(string Email)
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                return _dbContext.Publisher;
+            }
+            return _dbContext.Publisher.Where(p => EF.Functions.Like(Email, $"%{p.Email}%"));
+        }
+
         public async Task<Publisher> GetPublisherByEmailAsync(string Email)
         {
-            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.Email == Email);
+            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.Email.Equals(Email));
         }
 
         public async Task<Publisher> GetPublisherByNameAsync(string Name)
         {
-            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.Name == Name);
+            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.Name.Equals(Name));
         }
 
         public async Task<Publisher> GetPublisherByPhoneNumberAsync(string PhoneNumber)
         {
-            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.PhoneNumber == PhoneNumber);
+            return await _dbContext.Publisher.SingleOrDefaultAsync(p => p.PhoneNumber.Equals(PhoneNumber));
         }
         public async Task AddPublisherAsync(Publisher Publisher)
         {
@@ -48,6 +67,13 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         public void RemovePublisher(int Id)
         {
             _dbContext.Publisher.Remove(_dbContext.Publisher.Find(Id));
+        }
+        
+        public bool IsExist(string Name)
+        {
+            var publisher = _dbContext.Publisher.AsQueryable().Where(a => a.Name.Equals(Name));
+
+            return publisher.Any() ? true : false;
         }
     }
 }

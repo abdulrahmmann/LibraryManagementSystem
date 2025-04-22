@@ -7,6 +7,7 @@
         public string Email { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
         public DateOnly FoundedDate { get; private set; }
+        
         public int NumberOfBooksPublished { get; private set; }
 
 

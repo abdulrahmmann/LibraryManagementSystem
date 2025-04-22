@@ -9,6 +9,9 @@ namespace LibraryManagementSystem.Domain.IRepository
         public Task<Publisher> GetPublisherByNameAsync(string Name);
         public Task<Publisher> GetPublisherByEmailAsync(string Email);
         public Task<Publisher> GetPublisherByPhoneNumberAsync(string PhoneNumber);
+        
+        public IQueryable<Publisher> FilterPublishersByName(string Name);
+        public IQueryable<Publisher> FilterPublishersByEmail(string Email);
         #endregion
 
 
@@ -26,5 +29,7 @@ namespace LibraryManagementSystem.Domain.IRepository
         #region PUT METHODS
 
         #endregion
+        
+        public bool IsExist(string Name);
     }
 }

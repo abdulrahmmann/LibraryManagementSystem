@@ -32,10 +32,6 @@
     <Folder Include="Features\GenreFeature\DTOs\" />
     <Folder Include="Features\GenreFeature\Queries\" />
     <Folder Include="Features\GenreFeature\Validators\" />
-    <Folder Include="Features\PublisherFeature\Commands\" />
-    <Folder Include="Features\PublisherFeature\DTOs\" />
-    <Folder Include="Features\PublisherFeature\Queries\" />
-    <Folder Include="Features\PublisherFeature\Validators\" />
     <Folder Include="Features\UserFeature\Queries\" />
     <Folder Include="Features\UserFeature\Validators\" />
   </ItemGroup>
