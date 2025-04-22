@@ -28,7 +28,7 @@ namespace LibraryManagementSystem.Infrastructure.Repository
                 return _dbContext.Publisher;
             }
 
-            return _dbContext.Publisher.Where(p => EF.Functions.Like(Name, $"%{p.Name}%"));
+            return _dbContext.Publisher.Where(p => EF.Functions.Like(p.Name,$"%{Name}%"));
         }
 
         public IQueryable<Publisher> FilterPublishersByEmail(string Email)
@@ -37,7 +37,7 @@ namespace LibraryManagementSystem.Infrastructure.Repository
             {
                 return _dbContext.Publisher;
             }
-            return _dbContext.Publisher.Where(p => EF.Functions.Like(Email, $"%{p.Email}%"));
+            return _dbContext.Publisher.Where(p => EF.Functions.Like(p.Email, $"%{Email}%"));
         }
 
         public async Task<Publisher> GetPublisherByEmailAsync(string Email)
