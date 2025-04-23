@@ -4,37 +4,37 @@
     {
         public int Id { get; private set; }
 
-        public string Title { get; private set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
 
-        public string Summary { get; private set; } = string.Empty;
+        public string Summary { get; set; } = string.Empty;
 
-        public DateOnly PublishedDate { get; private set; }
+        public DateOnly PublishedDate { get; set; }
 
-        public int NumberOfPages { get; private set; }
+        public int NumberOfPages { get; set; }
 
-        public int Edition { get; private set; }
+        public int Edition { get; set; }
 
-        public string ISPN { get; private set; } = string.Empty;
+        public string ISPN { get; set; } = string.Empty;
 
-        public string CoverColor { get; private set; } = string.Empty;
+        public string CoverColor { get; set; } = string.Empty;
 
-        public string? BookCoverImage { get; private set; } = string.Empty;
+        public string? BookCoverImage { get; set; } = string.Empty;
 
         //******************** RELATIONS ********************//
-        public int AuthorId { get; private set; }
-        public Author Author { get; private set; } = new();
+        public int AuthorId { get; set; }
+        public Author Author { get; set; } = new();
 
-        public int GenreId { get; private set; }
-        public Genre Genre { get; private set; } = new();
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; } = new();
 
-        public ICollection<Copy> BookCopies { get; private set; } = [];
+        public ICollection<Copy> BookCopies { get; set; } = [];
 
-        public ICollection<Review> BookReviews { get; private set; } = [];
+        public ICollection<Review> BookReviews { get; set; } = [];
 
-        public int PublisherId { get; private set; }
-        public Publisher Publisher { get; private set; } = new();
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; } = new();
 
-        public ICollection<BorrowRequest> BorrowRequest { get; private set; } = [];
+        public ICollection<BorrowRequest> BorrowRequest { get; set; } = [];
 
         //******************** RELATIONS ********************//
     }

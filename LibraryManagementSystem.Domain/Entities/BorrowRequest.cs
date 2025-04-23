@@ -15,7 +15,7 @@
         public User User { get; private set; } = new();
 
         public int BookId { get; private set; }
-        public Book Book { get; private set; } = new();
+        public Book Book { get; private set; } 
 
         /*public int BookCopyId { get; private set; }
         public Copy Copy { get; private set; } = new();*/

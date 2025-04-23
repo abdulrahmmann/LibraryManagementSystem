@@ -6,6 +6,7 @@ namespace LibraryManagementSystem.Domain.IRepository
     public interface IBookRepository : IGenericRepository<Book>
     {
         #region GET METHODS
+        public Task<IEnumerable<Book>> GetAllBooks();
         public Task<Book> GetBookByTitle(string Title);
         public Task<Book> GetBookByEdition(int Edition);
         public Task<Book> GetBookByIspn(string ISPN);

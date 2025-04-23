@@ -5,6 +5,7 @@ using LibraryManagementSystem.Application.UOF;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using LibraryManagementSystem.Application.Features.BookFeature.Validators;
 using LibraryManagementSystem.Application.Features.GenreFeature.Validators;
 using LibraryManagementSystem.Application.Features.PublisherFeature.Validators;
 
@@ -31,6 +32,7 @@ namespace LibraryManagementSystem.Application
             service.AddValidatorsFromAssemblyContaining<AuthorValidator>();
             service.AddValidatorsFromAssemblyContaining<PublisherValidator>();
             service.AddValidatorsFromAssemblyContaining<GenreValidator>();
+            service.AddValidatorsFromAssemblyContaining<BookValidator>();
 
             // REGISTER UNIT OF WORK
             service.AddScoped<IUnitOfWork, UnitOfWork>();

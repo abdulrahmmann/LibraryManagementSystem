@@ -72,7 +72,7 @@ public class CreatePublisherCommandHandler: IRequestHandler<CreatePublisherComma
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "An error occurred while creating an publisher");
+            _logger.LogError(e, "An error occurred while creating a publisher");
 
             return BaseResponse<bool>.ErrorResponse("An unexpected error occurred.");
         }

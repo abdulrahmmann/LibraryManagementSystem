@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagementSystem.Application.Features.PublisherFeature.DTOs;
 
-public class PublisherDTO
+public sealed class PublisherDTO
 {
     public string Name { get; set; } = string.Empty;
     

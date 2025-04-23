@@ -21,9 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\BookFeature\Commands\" />
-    <Folder Include="Features\BookFeature\Queries\" />
-    <Folder Include="Features\BookFeature\Validators\" />
+    <Folder Include="Features\BookFeature\Queries\Handlers\" />
+    <Folder Include="Features\BookFeature\Queries\Requests\" />
     <Folder Include="Features\BookReviewFeature\Commands\" />
     <Folder Include="Features\BookReviewFeature\DTOs\" />
     <Folder Include="Features\BookReviewFeature\Queries\" />

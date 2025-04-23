@@ -21,6 +21,11 @@ namespace LibraryManagementSystem.Infrastructure.Repository
         #endregion
 
 
+        public async Task<IEnumerable<Book>> GetAllBooks()
+        {
+            return await _dbContext.Book.ToListAsync();
+        }
+        
         public async Task<Book> GetBookByEdition(int Edition)
         {
             return await _dbContext.Book.SingleOrDefaultAsync(x => x.Edition == Edition);

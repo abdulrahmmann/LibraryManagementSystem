@@ -13,7 +13,7 @@
         //## ******************** RELATIONS ******************** ##//
 
         public int BookId { get; private set; }
-        public Book Book { get; private set; } = new();
+        public Book Book { get; private set; }
 
         //## ******************** RELATIONS ******************** ##//
     }

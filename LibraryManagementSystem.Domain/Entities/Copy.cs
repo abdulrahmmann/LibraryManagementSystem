@@ -8,7 +8,7 @@
 
         //## ******************** RELATIONS ******************** ##//
         public int BookId { get; set; }
-        public Book Book { get; set; } = new();
+        public Book Book { get; set; }
 
         //public ICollection<BorrowRequest> BorrowRequests { get; set; } = [];
 

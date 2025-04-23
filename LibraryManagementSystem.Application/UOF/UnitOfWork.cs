@@ -20,7 +20,7 @@ namespace LibraryManagementSystem.Application.UOF
 
         #region INJECT INSTANCES INTO CONSTRUCTORS
         public UnitOfWork(ApplicationContext dbContext, IAuthorRepository authorRepository, IBookRepository bookRepository, IUserRepository userRepository,
-            IPublisherRepository publisherRepository, IGenreRepository genericRepository, IBookReviewRepository bookReviewRepository)
+            IPublisherRepository publisherRepository, IGenreRepository genericRepository, IBookReviewRepository bookReviewRepository )
         {
             _dbContext = dbContext;
             _repositories = new Dictionary<Type, object>();
