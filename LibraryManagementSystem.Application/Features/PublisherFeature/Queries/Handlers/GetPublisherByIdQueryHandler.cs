@@ -57,8 +57,8 @@ public class GetPublisherByIdQueryHandler: IRequestHandler<GetPublisherByIdQuery
         }
         catch (Exception e)
         {
-            _logger.LogError("An unexpected error occurred.");
-            return BaseResponse<PublisherDto>.InternalServerErrorResponse("An unexpected error occurred.");
+            _logger.LogError("An unexpected error occurred: {e.Message}.", e.Message);
+            return BaseResponse<PublisherDto>.InternalServerErrorResponse($"An unexpected error occurred: {e.Message}");
         }
     }
 }

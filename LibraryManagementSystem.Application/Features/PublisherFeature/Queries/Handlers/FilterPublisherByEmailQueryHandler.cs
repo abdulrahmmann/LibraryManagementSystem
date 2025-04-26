@@ -26,7 +26,7 @@ public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisher
     }
     #endregion
 
-    public async Task<BaseResponse<IQueryable<PublisherDto>>> Handle(FilterPublisherByEmailQuery request, CancellationToken cancellationToken)
+    public Task<BaseResponse<IQueryable<PublisherDto>>> Handle(FilterPublisherByEmailQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -38,7 +38,7 @@ public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisher
             {
                 _logger.LogWarning("No publishers found matching the email: {SearchName}", request.SearchEmail);
 
-                return BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found.");
+                return Task.FromResult(BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found."));
             }
 
             var publishersDto = _mapper.Map<List<PublisherDto>>(publisherList);
@@ -47,16 +47,16 @@ public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisher
             {
                 _logger.LogWarning("Mapping to PublishersDto resulted in an empty list for email: {SearchEmail}", request.SearchEmail);
 
-                return BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found after mapping.");
+                return Task.FromResult(BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found after mapping."));
             }
 
-            return BaseResponse<IQueryable<PublisherDto>>.SuccessResponse(publishersDto.AsQueryable(), "Successfully retrieved publishers.");
+            return Task.FromResult(BaseResponse<IQueryable<PublisherDto>>.SuccessResponse(publishersDto.AsQueryable(), "Successfully retrieved publishers."));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "An error occurred while retrieving publishers for email: {SearchEmail}", request.SearchEmail);
 
-            return BaseResponse<IQueryable<PublisherDto>>.InternalServerErrorResponse("An unexpected error occurred.");
+            return Task.FromResult(BaseResponse<IQueryable<PublisherDto>>.InternalServerErrorResponse("An unexpected error occurred."));
         }
     }
 }

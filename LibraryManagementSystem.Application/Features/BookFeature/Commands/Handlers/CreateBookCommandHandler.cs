@@ -2,12 +2,10 @@
 using LibraryManagementSystem.Application.Common;
 using LibraryManagementSystem.Application.Features.BookFeature.Commands.Requests;
 using LibraryManagementSystem.Application.Features.BookFeature.DTOs;
-using LibraryManagementSystem.Application.Features.PublisherFeature.DTOs;
 using LibraryManagementSystem.Application.UOF;
 using LibraryManagementSystem.Domain.Entities;
 using MapsterMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.BookFeature.Commands.Handlers;
@@ -22,7 +20,8 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
     #endregion
 
     #region INJECT INSTANCES INTO CONSTRUCTOR
-    public CreateBookCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
+
+    private protected CreateBookCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
         ILogger<CreateBookCommandHandler> logger, IValidator<CreateBookDto> validator)
     {
         _unitOfWork = unitOfWork;
@@ -36,7 +35,7 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
     {
         try
         {
-            if (request.CreateBookDto is null)
+            if (request?.CreateBookDto is null)
             {
                 _logger.LogWarning("request can not be null!");
                 return BaseResponse<bool>.ErrorResponse("request can not be null!");
@@ -65,9 +64,14 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
 
             if (author is null)
             {
+                var authorReq = request.CreateBookDto; 
                 var newAuthor = new Author
                 {
-                    Name = request.CreateBookDto.AuthorName
+                    Name = authorReq.AuthorName,
+                    Biography = authorReq.AuthorBiography,
+                    Nationality = authorReq.AuthorNationality,
+                    BirthDate = authorReq.AuthorBirthDate,
+                    NumberOfBooks = authorReq.AuthorNumberOfBooks
                 };
                 await _unitOfWork.AuthorRepository.AddAuthorAsync(newAuthor);
                 await _unitOfWork.SaveChangesAsync();
@@ -75,35 +79,49 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
             
             if (publisher is null)
             {
+                var pubReq = request.CreateBookDto;
                 var newPublisher = new Publisher
                 {
-                    Name = request.CreateBookDto.PublisherName
+                    Name = pubReq.PublisherName,
+                    Email = pubReq.PublisherEmail,
+                    PhoneNumber = pubReq.PublisherPhoneNumber,
+                    FoundedDate = pubReq.PublisherFoundedDate
                 };
                 await _unitOfWork.PublisherRepository.AddPublisherAsync(newPublisher);
                 await _unitOfWork.SaveChangesAsync();
             }
 
-            var req = request.CreateBookDto;
+            if (genre is null)
+            {
+                var genreReq = request.CreateBookDto;
+                var newGenre = new Genre
+                {
+                    Name = genreReq.AuthorName,
+                    Description = genreReq.GenreDescription,
+                    AverageRating = genreReq.GenreAverageRating
+                };
+                await _unitOfWork.GenreRepository.AddGenreAsync(newGenre);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            var bookReq = request.CreateBookDto;
             
             var newBook = new Book
             {
-                Title = req.Title,
-                Summary = req.Summary,
-                PublishedDate = req.PublishedDate,
-                NumberOfPages = req.NumberOfPages,
-                Edition = req.Edition,
-                Isbn = req.Isbn,
-                CoverColor = req.CoverColor,
-                BookCoverImage = req.BookCoverImage,
+                Title = bookReq.Title,
+                Summary = bookReq.Summary,
+                PublishedDate = bookReq.PublishedDate,
+                NumberOfPages = bookReq.NumberOfPages,
+                Edition = bookReq.Edition,
+                Isbn = bookReq.Isbn,
+                CoverColor = bookReq.CoverColor,
+                BookCoverImage = bookReq.BookCoverImage,
                 AuthorId = author!.Id,
                 GenreId = genre!.Id,
                 PublisherId = publisher!.Id
             };
             await _unitOfWork.BookRepository.AddBookAsync(newBook);
-            
             await _unitOfWork.SaveChangesAsync();
-            
-            
             
             _logger.LogInformation("Book created with Title: {Title}", request.CreateBookDto.Title);
 

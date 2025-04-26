@@ -51,8 +51,8 @@ public class GetAllPublisherQueryHandler: IRequestHandler<GetAllPublisherQuery, 
         }
         catch (Exception e)
         {
-            _logger.LogError("An unexpected error occurred.");
-            return BaseResponse<IEnumerable<PublisherDto>>.InternalServerErrorResponse("An unexpected error occurred.");
+            _logger.LogError("An unexpected error occurred: {e.Message}.", e.Message);
+            return BaseResponse<IEnumerable<PublisherDto>>.InternalServerErrorResponse($"An unexpected error occurred: {e.Message}.");
         }
     }
 }

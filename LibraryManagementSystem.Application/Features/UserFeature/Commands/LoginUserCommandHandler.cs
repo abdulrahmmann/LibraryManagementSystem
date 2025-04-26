@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Application.Common;
+﻿using System.Globalization;
+using LibraryManagementSystem.Application.Common;
 using LibraryManagementSystem.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -59,18 +60,17 @@ namespace LibraryManagementSystem.Application.Features.UserFeature.Commands
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? throw new InvalidOperationException());
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(new[]
-                {
+                Subject = new ClaimsIdentity([
                     new Claim("Id", user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email!),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                }),
+                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture))
+                ]),
 
                 Expires = DateTime.UtcNow.AddDays(7),
 
