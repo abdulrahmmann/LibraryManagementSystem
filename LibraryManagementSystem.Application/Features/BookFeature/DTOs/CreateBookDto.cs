@@ -21,21 +21,21 @@
         /********** If The Author|Genre|Publisher Doesn't Exist -> Create new Author|Genre|Publisher. **********/
         // Author
         public string AuthorName { get; set; } = string.Empty;
-        public string AuthorBiography { get; set; } = string.Empty;
+        /*public string AuthorBiography { get; set; } = string.Empty;
         public int AuthorNumberOfBooks { get; set; }
         public string AuthorNationality { get; set; } = string.Empty;
-        public DateOnly AuthorBirthDate { get; set; }
+        public DateOnly AuthorBirthDate { get; set; }*/
         
         // Genre
         public string GenreName { get; set; } = string.Empty;
-        public string GenreDescription { get; set; } = string.Empty;
-        public double GenreAverageRating { get; set; }
+        /*public string GenreDescription { get; set; } = string.Empty;
+        public double GenreAverageRating { get; set; }*/
         
         // Publisher
         public string PublisherName { get; set; } = string.Empty;
-        public string PublisherEmail { get; set; } = string.Empty;
+        /*public string PublisherEmail { get; set; } = string.Empty;
         public string PublisherPhoneNumber { get; set; } = string.Empty;
-        public DateOnly PublisherFoundedDate { get; set; }
+        public DateOnly PublisherFoundedDate { get; set; }*/
         /*******************************************************************************************************/
     }
 }

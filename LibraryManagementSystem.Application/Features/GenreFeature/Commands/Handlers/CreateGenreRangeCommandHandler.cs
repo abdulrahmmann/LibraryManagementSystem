@@ -33,8 +33,8 @@ public class CreateGenreRangeCommandHandler: IRequestHandler<CreateGenreRangeCom
     
     public async Task<BaseResponse<bool>> Handle(CreateGenreRangeCommand request, CancellationToken cancellationToken)
     {
-             try
-        {
+             try 
+             {
             if (request?.GenreDtos is null || !request.GenreDtos.Any())
             {
                 _logger.LogWarning("AuthorDTOs Request cannot be null or empty.");

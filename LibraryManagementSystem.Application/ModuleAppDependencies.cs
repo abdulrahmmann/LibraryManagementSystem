@@ -29,10 +29,12 @@ namespace LibraryManagementSystem.Application
             config.Scan(AppDomain.CurrentDomain.GetAssemblies());
 
             // Register FluentValidation
-            service.AddValidatorsFromAssemblyContaining<AuthorValidator>();
-            service.AddValidatorsFromAssemblyContaining<PublisherValidator>();
-            service.AddValidatorsFromAssemblyContaining<GenreValidator>();
-            service.AddValidatorsFromAssemblyContaining<CreateBookValidator>();
+            // If you have multiple Validators in your Application layer
+            service.AddValidatorsFromAssembly(typeof(AuthorValidator).Assembly);
+            service.AddValidatorsFromAssembly(typeof(PublisherValidator).Assembly);
+            service.AddValidatorsFromAssembly(typeof(GenreValidator).Assembly);
+            service.AddValidatorsFromAssembly(typeof(CreateBookValidator).Assembly);
+
 
             // REGISTER UNIT OF WORK
             service.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -3,9 +3,9 @@ using LibraryManagementSystem.Application.Features.BookFeature.DTOs;
 
 namespace LibraryManagementSystem.Application.Features.BookFeature.Validators;
 
-public abstract class CreateBookValidator: AbstractValidator<CreateBookDto>
+public class CreateBookValidator: AbstractValidator<CreateBookDto>
 {
-    protected CreateBookValidator()
+    public CreateBookValidator()
     {
         RuleFor(book => book.Title)
             .NotEmpty().WithMessage("Title is required.")
@@ -41,7 +41,5 @@ public abstract class CreateBookValidator: AbstractValidator<CreateBookDto>
         
         RuleFor(book => book.PublisherName)
             .NotEmpty().WithMessage("Publisher name is required.");
-
-        RuleFor(book => book.BookCoverImage).Empty();
     }
 }

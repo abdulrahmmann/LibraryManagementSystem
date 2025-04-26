@@ -3,9 +3,9 @@ using LibraryManagementSystem.Application.Features.PublisherFeature.DTOs;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Validators;
 
-public abstract class PublisherValidator: AbstractValidator<PublisherDto>
+public class PublisherValidator: AbstractValidator<PublisherDto>
 {
-    protected PublisherValidator()
+    public PublisherValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Publisher name is required.")

@@ -3,9 +3,9 @@ using LibraryManagementSystem.Application.Features.GenreFeature.DTOs;
 
 namespace LibraryManagementSystem.Application.Features.GenreFeature.Validators;
 
-public abstract class GenreValidator: AbstractValidator<GenreDto>
+public class GenreValidator: AbstractValidator<GenreDto>
 {
-    protected GenreValidator()
+    public GenreValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Genre name is required.")
