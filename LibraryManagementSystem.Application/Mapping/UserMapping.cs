@@ -9,21 +9,21 @@ namespace LibraryManagementSystem.Application.Mapping
         public static void Configure()
         {
             // LOGIN
-            TypeAdapterConfig<User, LoginUserDTO>.NewConfig()
+            TypeAdapterConfig<User, LoginUserDto>.NewConfig()
                 .Map(dest => dest.Email, src => src.Email)
                 .Map(dest => dest.Password, src => src.PasswordHash);
 
-            TypeAdapterConfig<LoginUserDTO, User>.NewConfig()
+            TypeAdapterConfig<LoginUserDto, User>.NewConfig()
                 .Map(dest => dest.Email, src => src.Email)
                 .Map(dest => dest.PasswordHash, src => src.Password);
 
             // REGISTER
-            TypeAdapterConfig<User, RegisterUserDTO>.NewConfig()
+            TypeAdapterConfig<User, RegisterUserDto>.NewConfig()
                 .Map(dest => dest.Email, src => src.Email)
                 .Map(dest => dest.Password, src => src.PasswordHash)
                 .Map(dest => dest.UserName, src => src.UserName);
 
-            TypeAdapterConfig<RegisterUserDTO, User>.NewConfig()
+            TypeAdapterConfig<RegisterUserDto, User>.NewConfig()
                 .Map(dest => dest.Email, src => src.Email)
                 .Map(dest => dest.PasswordHash, src => src.Password)
                 .Map(dest => dest.UserName, src => src.UserName);

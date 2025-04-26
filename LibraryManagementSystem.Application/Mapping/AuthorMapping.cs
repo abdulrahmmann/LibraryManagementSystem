@@ -8,14 +8,14 @@ namespace LibraryManagementSystem.Application.Mapping
     {
         public static void Configure()
         {
-            TypeAdapterConfig<Author, AuthorDTO>.NewConfig()
+            TypeAdapterConfig<Author, AuthorDto>.NewConfig()
                 .Map(dest => dest.Name, src => src.Name)
                 .Map(dest => dest.Biography, src => src.Biography)
                 .Map(dest => dest.Nationality, src => src.Nationality)
                 .Map(dest => dest.BirthDate, src => src.BirthDate)
                 .Map(dest => dest.NumberOfBooks, src => src.NumberOfBooks);
 
-            TypeAdapterConfig<AuthorDTO, Author>.NewConfig()
+            TypeAdapterConfig<AuthorDto, Author>.NewConfig()
                 .Map(dest => dest.Name, src => src.Name)
                 .Map(dest => dest.Biography, src => src.Biography)
                 .Map(dest => dest.Nationality, src => src.Nationality)

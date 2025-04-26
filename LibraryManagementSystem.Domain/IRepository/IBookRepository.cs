@@ -9,7 +9,7 @@ namespace LibraryManagementSystem.Domain.IRepository
         public Task<IEnumerable<Book>> GetAllBooks();
         public Task<Book> GetBookByTitle(string Title);
         public Task<Book> GetBookByEdition(int Edition);
-        public Task<Book> GetBookByIspn(string ISPN);
+        public Task<Book> GetBookByIsbn(string ISPN);
         public Task<Book> GetBookByPublishedDate(string PublishedDate);
         #endregion
 

@@ -9,9 +9,9 @@ namespace LibraryManagementSystem.Api.Controllers
     public class BookController : AppControllerBase
     {
         [HttpPost("CreateBook")]
-        public async Task<IActionResult> CreateBook(BookDTO bookDto)
+        public async Task<IActionResult> CreateBook(CreateBookDto createBookDto)
         {
-            var result = await Mediator.Send(new CreateBookCommand(bookDto));
+            var result = await Mediator.Send(new CreateBookCommand(createBookDto));
 
             return NewResult(result);
         }

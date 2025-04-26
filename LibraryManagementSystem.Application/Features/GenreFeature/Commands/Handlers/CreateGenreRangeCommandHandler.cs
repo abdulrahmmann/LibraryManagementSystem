@@ -16,12 +16,12 @@ public class CreateGenreRangeCommandHandler: IRequestHandler<CreateGenreRangeCom
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateGenreRangeCommandHandler> _logger;
-    private readonly IValidator<GenreDTO> _validator;
+    private readonly IValidator<GenreDto> _validator;
     #endregion
 
     #region INJECT INSTANCES INTO CONSTRUCTOR
     public CreateGenreRangeCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
-        ILogger<CreateGenreRangeCommandHandler> logger, IValidator<GenreDTO> validator)
+        ILogger<CreateGenreRangeCommandHandler> logger, IValidator<GenreDto> validator)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

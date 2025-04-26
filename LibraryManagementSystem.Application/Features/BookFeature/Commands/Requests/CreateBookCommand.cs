@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.BookFeature.Commands.Requests;
 
-public record CreateBookCommand(BookDTO BookDto): IRequest<BaseResponse<bool>>;
+public record CreateBookCommand(CreateBookDto CreateBookDto): IRequest<BaseResponse<bool>>;

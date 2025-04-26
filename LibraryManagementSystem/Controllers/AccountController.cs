@@ -17,7 +17,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("RegisterUser")]
-        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDTO userDTO)
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDto userDTO)
         {
             var result = await _mediator.Send(new RegisterUserCommand(userDTO));
 
@@ -30,7 +30,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("LoginUser")]
-        public async Task<IActionResult> LoginUser([FromBody] LoginUserDTO userDTO)
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserDto userDTO)
         {
             var result = await _mediator.Send(new LoginUserCommand(userDTO));
 
@@ -43,7 +43,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO passwordDTO)
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto passwordDTO)
         {
             var result = await _mediator.Send(new ForgotPasswordCommand(passwordDTO));
 
@@ -56,7 +56,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO passwordDTO)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto passwordDTO)
         {
             var result = await _mediator.Send(new ResetPasswordCommand(passwordDTO));
 

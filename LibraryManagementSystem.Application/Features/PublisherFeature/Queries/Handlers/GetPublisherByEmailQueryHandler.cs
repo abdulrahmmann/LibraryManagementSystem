@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Handlers;
 
-public class GetPublisherByEmailQueryHandler : IRequestHandler<GetPublisherByEmailQuery, BaseResponse<PublisherDTO>>
+public class GetPublisherByEmailQueryHandler : IRequestHandler<GetPublisherByEmailQuery, BaseResponse<PublisherDto>>
 {
     #region INSTANCE FIELDS
 
@@ -30,7 +30,7 @@ public class GetPublisherByEmailQueryHandler : IRequestHandler<GetPublisherByEma
 
     #endregion
 
-    public async Task<BaseResponse<PublisherDTO>> Handle(GetPublisherByEmailQuery request,
+    public async Task<BaseResponse<PublisherDto>> Handle(GetPublisherByEmailQuery request,
         CancellationToken cancellationToken)
     {
         try
@@ -38,7 +38,7 @@ public class GetPublisherByEmailQueryHandler : IRequestHandler<GetPublisherByEma
             if (request.Email is null)
             {
                 _logger.LogWarning($"request Email: {request.Email} can not be null!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse(
+                return BaseResponse<PublisherDto>.NoContentResponse(
                     $"request Email: {request.Email} can not be null!!");
             }
 
@@ -47,26 +47,26 @@ public class GetPublisherByEmailQueryHandler : IRequestHandler<GetPublisherByEma
             if (publisher is null)
             {
                 _logger.LogWarning("publisher Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("publisher Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("publisher Is Null or Empty!!!");
             }
 
-            var publisherDto = _mapper.Map<PublisherDTO>(publisher);
+            var publisherDto = _mapper.Map<PublisherDto>(publisher);
 
             if (publisherDto is null)
             {
                 _logger.LogWarning("Publisher DTO Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
             }
 
             _logger.LogInformation("Successfully Retrieving Publisher By Email: {Email}", request.Email);
 
-            return BaseResponse<PublisherDTO>.SuccessResponse(publisherDto,
+            return BaseResponse<PublisherDto>.SuccessResponse(publisherDto,
                 $"Successfully Retrieving Publisher By Email: {request.Email}");
         }
         catch (Exception e)
         {
             _logger.LogError("An unexpected error occurred: {Message}.", e.Message);
-            return BaseResponse<PublisherDTO>.InternalServerErrorResponse("An unexpected error occurred.");
+            return BaseResponse<PublisherDto>.InternalServerErrorResponse("An unexpected error occurred.");
         }
     }
 }

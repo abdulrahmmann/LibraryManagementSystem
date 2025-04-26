@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Handlers;
 
-public class GetPublisherByIdQueryHandler: IRequestHandler<GetPublisherByIdQuery, BaseResponse<PublisherDTO>>
+public class GetPublisherByIdQueryHandler: IRequestHandler<GetPublisherByIdQuery, BaseResponse<PublisherDto>>
 {
     #region INSTANCE FIELDS
     private readonly IUnitOfWork _unitOfWork;
@@ -26,39 +26,39 @@ public class GetPublisherByIdQueryHandler: IRequestHandler<GetPublisherByIdQuery
     }
     #endregion
     
-    public async Task<BaseResponse<PublisherDTO>> Handle(GetPublisherByIdQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<PublisherDto>> Handle(GetPublisherByIdQuery request, CancellationToken cancellationToken)
     {
         try
         {
             if (request.Id < 0)
             {
                 _logger.LogWarning($"request Id: {request.Id} can not be less than 0!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse($"request Id: {request.Id} can not be less than 0!!");
+                return BaseResponse<PublisherDto>.NoContentResponse($"request Id: {request.Id} can not be less than 0!!");
             }
             var publisher = await _unitOfWork.PublisherRepository.GetById(request.Id);
 
             if (publisher is null)
             {
                 _logger.LogWarning("publisher Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("publisher Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("publisher Is Null or Empty!!!");
             }
             
-            var publisherDto = _mapper.Map<PublisherDTO>(publisher);
+            var publisherDto = _mapper.Map<PublisherDto>(publisher);
 
             if (publisherDto is null)
             {
                 _logger.LogWarning("Publisher DTO Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
             }
             
             _logger.LogInformation("Successfully Retrieving Publisher By Id: {Id}", request.Id);
 
-            return BaseResponse<PublisherDTO>.SuccessResponse(publisherDto, $"Successfully Retrieving Publisher By Id: {request.Id}");
+            return BaseResponse<PublisherDto>.SuccessResponse(publisherDto, $"Successfully Retrieving Publisher By Id: {request.Id}");
         }
         catch (Exception e)
         {
             _logger.LogError("An unexpected error occurred.");
-            return BaseResponse<PublisherDTO>.InternalServerErrorResponse("An unexpected error occurred.");
+            return BaseResponse<PublisherDto>.InternalServerErrorResponse("An unexpected error occurred.");
         }
     }
 }

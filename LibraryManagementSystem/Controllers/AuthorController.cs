@@ -8,7 +8,7 @@ namespace LibraryManagementSystem.Api.Controllers
     public class AuthorController : AppControllerBase
     {
         [HttpPost("createAuthor")]
-        public async Task<IActionResult> CreateAuthor([FromBody] AuthorDTO authorDTO)
+        public async Task<IActionResult> CreateAuthor([FromBody] AuthorDto authorDTO)
         {
             var result = await Mediator.Send(new CreateAuthorCommand(authorDTO));
 
@@ -16,7 +16,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("createAuthorRange")]
-        public async Task<IActionResult> CreateAuthorRange([FromBody] IEnumerable<AuthorDTO> authorDTOs)
+        public async Task<IActionResult> CreateAuthorRange([FromBody] IEnumerable<AuthorDto> authorDTOs)
         {
             var result = await Mediator.Send(new CreateAuthorRangeCommand(authorDTOs));
 

@@ -1,8 +1,7 @@
 ﻿namespace LibraryManagementSystem.Application.Features.UserFeature.DTOs
 {
-    public class LoginUserDTO
+    public sealed class ForgotPasswordDto
     {
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }

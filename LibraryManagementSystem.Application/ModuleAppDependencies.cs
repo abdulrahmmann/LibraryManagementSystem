@@ -32,7 +32,7 @@ namespace LibraryManagementSystem.Application
             service.AddValidatorsFromAssemblyContaining<AuthorValidator>();
             service.AddValidatorsFromAssemblyContaining<PublisherValidator>();
             service.AddValidatorsFromAssemblyContaining<GenreValidator>();
-            service.AddValidatorsFromAssemblyContaining<BookValidator>();
+            service.AddValidatorsFromAssemblyContaining<CreateBookValidator>();
 
             // REGISTER UNIT OF WORK
             service.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -41,3 +41,4 @@ namespace LibraryManagementSystem.Application
         }
     }
 }
+//ChangeBookIsbnSpelling

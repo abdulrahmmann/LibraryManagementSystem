@@ -3,9 +3,9 @@ using LibraryManagementSystem.Application.Features.AuthorFeature.DTOs;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Validators
 {
-    public class AuthorValidator : AbstractValidator<AuthorDTO>
+    public abstract class AuthorValidator : AbstractValidator<AuthorDto>
     {
-        public AuthorValidator()
+        protected AuthorValidator()
         {
             RuleFor(a => a.Name)
                 .NotEmpty().WithMessage("Author name cannot be empty.")

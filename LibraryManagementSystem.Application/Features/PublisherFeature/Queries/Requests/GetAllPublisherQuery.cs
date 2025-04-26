@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Requests;
 
-public record GetAllPublisherQuery(): IRequest<BaseResponse<IEnumerable<PublisherDTO>>>;
+public record GetAllPublisherQuery(): IRequest<BaseResponse<IEnumerable<PublisherDto>>>;

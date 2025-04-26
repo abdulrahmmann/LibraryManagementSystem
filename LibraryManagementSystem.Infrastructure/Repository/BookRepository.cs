@@ -31,9 +31,9 @@ namespace LibraryManagementSystem.Infrastructure.Repository
             return await _dbContext.Book.SingleOrDefaultAsync(x => x.Edition == Edition);
         }
 
-        public async Task<Book> GetBookByIspn(string ISPN)
+        public async Task<Book> GetBookByIsbn(string Isbn)
         {
-            return await _dbContext.Book.SingleOrDefaultAsync(x => x.ISPN.Equals(ISPN));
+            return await _dbContext.Book.SingleOrDefaultAsync(x => x.Isbn.Equals(Isbn));
         }
 
         public async Task<Book> GetBookByPublishedDate(string PublishedDate)

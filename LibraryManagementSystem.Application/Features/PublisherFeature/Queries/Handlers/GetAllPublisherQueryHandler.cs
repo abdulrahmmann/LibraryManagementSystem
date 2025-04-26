@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Handlers;
 
-public class GetAllPublisherQueryHandler: IRequestHandler<GetAllPublisherQuery, BaseResponse<IEnumerable<PublisherDTO>>>
+public class GetAllPublisherQueryHandler: IRequestHandler<GetAllPublisherQuery, BaseResponse<IEnumerable<PublisherDto>>>
 {
     #region INSTANCE FIELDS
     private readonly IUnitOfWork _unitOfWork;
@@ -27,7 +27,7 @@ public class GetAllPublisherQueryHandler: IRequestHandler<GetAllPublisherQuery, 
     #endregion
 
 
-    public async Task<BaseResponse<IEnumerable<PublisherDTO>>> Handle(GetAllPublisherQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<IEnumerable<PublisherDto>>> Handle(GetAllPublisherQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -36,23 +36,23 @@ public class GetAllPublisherQueryHandler: IRequestHandler<GetAllPublisherQuery, 
             if (!publishers.Any() )
             {
                 _logger.LogWarning("publishers is null or empty!.");
-                return BaseResponse<IEnumerable<PublisherDTO>>.NoContentResponse("publishers is null or empty!.");
+                return BaseResponse<IEnumerable<PublisherDto>>.NoContentResponse("publishers is null or empty!.");
             }
             
-            var publisherDTOs = _mapper.Map<IEnumerable<PublisherDTO>>(publishers);
+            var publisherDTOs = _mapper.Map<IEnumerable<PublisherDto>>(publishers);
 
             if (!publisherDTOs.Any())
             {
                 _logger.LogWarning("publishers Map is null or empty!.");
-                return BaseResponse<IEnumerable<PublisherDTO>>.NoContentResponse("publishers Map is null or empty!.");
+                return BaseResponse<IEnumerable<PublisherDto>>.NoContentResponse("publishers Map is null or empty!.");
             }
             
-            return BaseResponse<IEnumerable<PublisherDTO>>.SuccessResponse(publisherDTOs);
+            return BaseResponse<IEnumerable<PublisherDto>>.SuccessResponse(publisherDTOs);
         }
         catch (Exception e)
         {
             _logger.LogError("An unexpected error occurred.");
-            return BaseResponse<IEnumerable<PublisherDTO>>.InternalServerErrorResponse("An unexpected error occurred.");
+            return BaseResponse<IEnumerable<PublisherDto>>.InternalServerErrorResponse("An unexpected error occurred.");
         }
     }
 }

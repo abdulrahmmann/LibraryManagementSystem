@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Handlers;
 
-public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisherByEmailQuery, BaseResponse<IQueryable<PublisherDTO>>>
+public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisherByEmailQuery, BaseResponse<IQueryable<PublisherDto>>>
 {
     #region INSTANCE FIELDS
     private readonly IUnitOfWork _unitOfWork;
@@ -26,7 +26,7 @@ public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisher
     }
     #endregion
 
-    public async Task<BaseResponse<IQueryable<PublisherDTO>>> Handle(FilterPublisherByEmailQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<IQueryable<PublisherDto>>> Handle(FilterPublisherByEmailQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -38,25 +38,25 @@ public class FilterPublisherByEmailQueryHandler: IRequestHandler<FilterPublisher
             {
                 _logger.LogWarning("No publishers found matching the email: {SearchName}", request.SearchEmail);
 
-                return BaseResponse<IQueryable<PublisherDTO>>.NoContentResponse("No publishers found.");
+                return BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found.");
             }
 
-            var publishersDto = _mapper.Map<List<PublisherDTO>>(publisherList);
+            var publishersDto = _mapper.Map<List<PublisherDto>>(publisherList);
 
             if (!publishersDto.Any())
             {
                 _logger.LogWarning("Mapping to PublishersDto resulted in an empty list for email: {SearchEmail}", request.SearchEmail);
 
-                return BaseResponse<IQueryable<PublisherDTO>>.NoContentResponse("No publishers found after mapping.");
+                return BaseResponse<IQueryable<PublisherDto>>.NoContentResponse("No publishers found after mapping.");
             }
 
-            return BaseResponse<IQueryable<PublisherDTO>>.SuccessResponse(publishersDto.AsQueryable(), "Successfully retrieved publishers.");
+            return BaseResponse<IQueryable<PublisherDto>>.SuccessResponse(publishersDto.AsQueryable(), "Successfully retrieved publishers.");
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "An error occurred while retrieving publishers for email: {SearchEmail}", request.SearchEmail);
 
-            return BaseResponse<IQueryable<PublisherDTO>>.InternalServerErrorResponse("An unexpected error occurred.");
+            return BaseResponse<IQueryable<PublisherDto>>.InternalServerErrorResponse("An unexpected error occurred.");
         }
     }
 }

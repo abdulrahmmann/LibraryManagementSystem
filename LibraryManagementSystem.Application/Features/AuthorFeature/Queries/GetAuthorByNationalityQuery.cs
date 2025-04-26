@@ -4,5 +4,5 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public record GetAuthorByNationalityQuery(string Nationality) : IRequest<BaseResponse<IEnumerable<AuthorDTO>>>;
+    public record GetAuthorByNationalityQuery(string Nationality) : IRequest<BaseResponse<IEnumerable<AuthorDto>>>;
 }

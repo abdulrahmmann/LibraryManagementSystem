@@ -15,13 +15,13 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateAuthorRangeCommandHandler> _logger;
-        private readonly IValidator<AuthorDTO> _validator;
+        private readonly IValidator<AuthorDto> _validator;
         #endregion
 
 
         #region INJECT INSTANCES INTO CONSTRUCTOR
         public CreateAuthorRangeCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
-            ILogger<CreateAuthorRangeCommandHandler> logger, IValidator<AuthorDTO> validator)
+            ILogger<CreateAuthorRangeCommandHandler> logger, IValidator<AuthorDto> validator)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

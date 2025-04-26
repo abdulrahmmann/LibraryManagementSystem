@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Handlers;
 
-public class GetPublisherByPhoneQueryHandler: IRequestHandler<GetPublisherByPhoneQuery, BaseResponse<PublisherDTO>>
+public class GetPublisherByPhoneQueryHandler: IRequestHandler<GetPublisherByPhoneQuery, BaseResponse<PublisherDto>>
 {
     #region INSTANCE FIELDS
     private readonly IUnitOfWork _unitOfWork;
@@ -27,39 +27,39 @@ public class GetPublisherByPhoneQueryHandler: IRequestHandler<GetPublisherByPhon
     #endregion
 
     
-    public async Task<BaseResponse<PublisherDTO>> Handle(GetPublisherByPhoneQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<PublisherDto>> Handle(GetPublisherByPhoneQuery request, CancellationToken cancellationToken)
     {
         try
         {
             if (request.PhoneNumber is null)
             {
                 _logger.LogWarning($"request PhoneNumber: {request.PhoneNumber} can not be null!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse($"request PhoneNumber: {request.PhoneNumber} can not be null!!");
+                return BaseResponse<PublisherDto>.NoContentResponse($"request PhoneNumber: {request.PhoneNumber} can not be null!!");
             }
             var publisher = await _unitOfWork.PublisherRepository.GetPublisherByPhoneNumberAsync(request.PhoneNumber);
 
             if (publisher is null)
             {
                 _logger.LogWarning("publisher Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("publisher Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("publisher Is Null or Empty!!!");
             }
             
-            var publisherDto = _mapper.Map<PublisherDTO>(publisher);
+            var publisherDto = _mapper.Map<PublisherDto>(publisher);
 
             if (publisherDto is null)
             {
                 _logger.LogWarning("Publisher DTO Is Null or Empty!!!");
-                return BaseResponse<PublisherDTO>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
+                return BaseResponse<PublisherDto>.NoContentResponse("Publisher DTO Is Null or Empty!!!");
             }
             
             _logger.LogInformation("Successfully Retrieving Publisher By PhoneNumber: {PhoneNumber}", request.PhoneNumber);
 
-            return BaseResponse<PublisherDTO>.SuccessResponse(publisherDto, $"Successfully Retrieving Publisher By PhoneNumber: {request.PhoneNumber}");
+            return BaseResponse<PublisherDto>.SuccessResponse(publisherDto, $"Successfully Retrieving Publisher By PhoneNumber: {request.PhoneNumber}");
         }
         catch (Exception e)
         {
             _logger.LogError("An unexpected error occurred: {Message}.", e.Message);
-            return BaseResponse<PublisherDTO>.InternalServerErrorResponse("An unexpected error occurred.");
+            return BaseResponse<PublisherDto>.InternalServerErrorResponse("An unexpected error occurred.");
         }
     }
 }

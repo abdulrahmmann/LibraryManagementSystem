@@ -4,5 +4,5 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public record GetAllAuthorsQuery() : IRequest<BaseResponse<IEnumerable<AuthorDTO>>>;
+    public record GetAllAuthorsQuery() : IRequest<BaseResponse<IEnumerable<AuthorDto>>>;
 }

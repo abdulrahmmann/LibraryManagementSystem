@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public class FilterAuthorByNameQueryHandler : IRequestHandler<FilterAuthorByNameQuery, BaseResponse<IQueryable<AuthorDTO>>>
+    public class FilterAuthorByNameQueryHandler : IRequestHandler<FilterAuthorByNameQuery, BaseResponse<IQueryable<AuthorDto>>>
     {
         #region INSTANCE FIELDS
         private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +25,7 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
         }
         #endregion
 
-        public async Task<BaseResponse<IQueryable<AuthorDTO>>> Handle(FilterAuthorByNameQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<IQueryable<AuthorDto>>> Handle(FilterAuthorByNameQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -37,25 +37,25 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
                 {
                     _logger.LogWarning("No authors found matching the name: {SearchName}", request.searchName);
 
-                    return BaseResponse<IQueryable<AuthorDTO>>.NoContentResponse("No authors found.");
+                    return BaseResponse<IQueryable<AuthorDto>>.NoContentResponse("No authors found.");
                 }
 
-                var authorsDto = _mapper.Map<List<AuthorDTO>>(authorList);
+                var authorsDto = _mapper.Map<List<AuthorDto>>(authorList);
 
                 if (!authorsDto.Any())
                 {
                     _logger.LogWarning("Mapping to AuthorDTO resulted in an empty list for name: {SearchName}", request.searchName);
 
-                    return BaseResponse<IQueryable<AuthorDTO>>.NoContentResponse("No authors found after mapping.");
+                    return BaseResponse<IQueryable<AuthorDto>>.NoContentResponse("No authors found after mapping.");
                 }
 
-                return BaseResponse<IQueryable<AuthorDTO>>.SuccessResponse(authorsDto.AsQueryable(), "Successfully retrieved authors.");
+                return BaseResponse<IQueryable<AuthorDto>>.SuccessResponse(authorsDto.AsQueryable(), "Successfully retrieved authors.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving authors for name: {SearchName}", request.searchName);
 
-                return BaseResponse<IQueryable<AuthorDTO>>.InternalServerErrorResponse("An unexpected error occurred.");
+                return BaseResponse<IQueryable<AuthorDto>>.InternalServerErrorResponse("An unexpected error occurred.");
             }
         }
     }

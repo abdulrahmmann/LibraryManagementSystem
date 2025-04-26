@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Commands.Requests;
 
-public sealed record CreatePublishersRangeCommand(IEnumerable<PublisherDTO> PublisherDtos): IRequest<BaseResponse<bool>>;
+public sealed record CreatePublishersRangeCommand(IEnumerable<PublisherDto> PublisherDtos): IRequest<BaseResponse<bool>>;

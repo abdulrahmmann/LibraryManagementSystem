@@ -3,9 +3,9 @@ using LibraryManagementSystem.Application.Features.BookFeature.DTOs;
 
 namespace LibraryManagementSystem.Application.Features.BookFeature.Validators;
 
-public class BookValidator: AbstractValidator<BookDTO>
+public abstract class CreateBookValidator: AbstractValidator<CreateBookDto>
 {
-    public BookValidator()
+    protected CreateBookValidator()
     {
         RuleFor(book => book.Title)
             .NotEmpty().WithMessage("Title is required.")
@@ -26,9 +26,9 @@ public class BookValidator: AbstractValidator<BookDTO>
         RuleFor(book => book.Edition)
             .GreaterThan(0).WithMessage("Edition must be greater than 0.");
 
-        RuleFor(book => book.ISPN)
-            .NotEmpty().WithMessage("ISPN is required.")
-            .Length(10, 13).WithMessage("ISPN must be between 10 and 13 characters.");
+        RuleFor(book => book.Isbn)
+            .NotEmpty().WithMessage("ISBN is required.")
+            .Length(10, 13).WithMessage("ISBN must be between 10 and 13 characters.");
 
         RuleFor(book => book.CoverColor)
             .NotEmpty().WithMessage("Cover color is required.");

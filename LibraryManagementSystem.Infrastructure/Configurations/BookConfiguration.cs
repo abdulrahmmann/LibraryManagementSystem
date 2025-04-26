@@ -14,7 +14,7 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
             builder.Property(b => b.Id)
                 .HasColumnName("BookId").UseIdentityColumn();
 
-            builder.HasIndex(b => b.ISPN).IsUnique();
+            builder.HasIndex(b => b.Isbn).IsUnique();
             builder.HasIndex(b => b.Title);
 
             builder.Property(b => b.Title)
@@ -27,6 +27,10 @@ namespace LibraryManagementSystem.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(800);
 
+            builder.Property(b => b.Isbn)
+                .HasColumnName("ISBN")
+                .IsRequired();
+            
             //## BOOK - AUTHOR -> ONE - MANY ##//
             builder
                 .HasOne(b => b.Author)

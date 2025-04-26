@@ -4,5 +4,5 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Commands
 {
-    public record CreateAuthorRangeCommand(IEnumerable<AuthorDTO> AuthorDTOs) : IRequest<BaseResponse<bool>>;
+    public record CreateAuthorRangeCommand(IEnumerable<AuthorDto> AuthorDTOs) : IRequest<BaseResponse<bool>>;
 }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public class GetAuthorByNationalityQueryHandler : IRequestHandler<GetAuthorByNationalityQuery, BaseResponse<IEnumerable<AuthorDTO>>>
+    public class GetAuthorByNationalityQueryHandler : IRequestHandler<GetAuthorByNationalityQuery, BaseResponse<IEnumerable<AuthorDto>>>
     {
         #region INSTANCE FIELDS
         private readonly IUnitOfWork _unitOfWork;
@@ -27,7 +27,7 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
         #endregion
 
 
-        public async Task<BaseResponse<IEnumerable<AuthorDTO>>> Handle(GetAuthorByNationalityQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<IEnumerable<AuthorDto>>> Handle(GetAuthorByNationalityQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -37,28 +37,28 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
                 {
                     _logger.LogWarning("Author Is Null or Empty!");
 
-                    return BaseResponse<IEnumerable<AuthorDTO>>.NoContentResponse("Author DTO Is Null or Empty!");
+                    return BaseResponse<IEnumerable<AuthorDto>>.NoContentResponse("Author DTO Is Null or Empty!");
                 }
 
-                var authorDto = _mapper.Map<IEnumerable<AuthorDTO>>(author!);
+                var authorDto = _mapper.Map<IEnumerable<AuthorDto>>(author!);
 
                 if (authorDto is null)
                 {
                     _logger.LogWarning("Author DTO Is Null or Empty!");
 
-                    return BaseResponse<IEnumerable<AuthorDTO>>.NoContentResponse("Author DTO Is Null or Empty!");
+                    return BaseResponse<IEnumerable<AuthorDto>>.NoContentResponse("Author DTO Is Null or Empty!");
                 }
 
                 _logger.LogInformation("Successfully Retrieving Author By Nationality: {Nationality}", request.Nationality);
 
-                return BaseResponse<IEnumerable<AuthorDTO>>.SuccessResponse(authorDto, $"Successfully Retrieving Author By Nationality: {request.Nationality}");
+                return BaseResponse<IEnumerable<AuthorDto>>.SuccessResponse(authorDto, $"Successfully Retrieving Author By Nationality: {request.Nationality}");
 
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while Retrieving authors.");
 
-                return BaseResponse<IEnumerable<AuthorDTO>>.InternalServerErrorResponse("An unexpected error occurred.");
+                return BaseResponse<IEnumerable<AuthorDto>>.InternalServerErrorResponse("An unexpected error occurred.");
             }
         }
     }

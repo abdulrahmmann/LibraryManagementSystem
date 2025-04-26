@@ -16,12 +16,12 @@ public class CreatePublisherCommandHandler: IRequestHandler<CreatePublisherComma
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<CreatePublisherCommandHandler> _logger;
-    private readonly IValidator<PublisherDTO> _validator;
+    private readonly IValidator<PublisherDto> _validator;
     #endregion
 
     #region INJECT INSTANCES INTO CONSTRUCTOR
     public CreatePublisherCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
-        ILogger<CreatePublisherCommandHandler> logger, IValidator<PublisherDTO> validator)
+        ILogger<CreatePublisherCommandHandler> logger, IValidator<PublisherDto> validator)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

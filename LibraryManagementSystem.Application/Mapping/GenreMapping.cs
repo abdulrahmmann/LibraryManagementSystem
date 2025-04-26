@@ -8,12 +8,12 @@ public static class GenreMapping
 {
     public static void Configure()
     {
-        TypeAdapterConfig<Genre, GenreDTO>.NewConfig()
+        TypeAdapterConfig<Genre, GenreDto>.NewConfig()
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Description, src => src.Description)
             .Map(dest => dest.AverageRating, src => src.AverageRating);
         
-        TypeAdapterConfig<GenreDTO, Genre>.NewConfig()
+        TypeAdapterConfig<GenreDto, Genre>.NewConfig()
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Description, src => src.Description)
             .Map(dest => dest.AverageRating, src => src.AverageRating);

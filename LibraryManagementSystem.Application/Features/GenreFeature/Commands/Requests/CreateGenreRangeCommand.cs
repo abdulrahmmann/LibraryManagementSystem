@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.GenreFeature.Commands.Requests;
 
-public record CreateGenreRangeCommand(IEnumerable<GenreDTO> GenreDtos): IRequest<BaseResponse<bool>>;
+public record CreateGenreRangeCommand(IEnumerable<GenreDto> GenreDtos): IRequest<BaseResponse<bool>>;

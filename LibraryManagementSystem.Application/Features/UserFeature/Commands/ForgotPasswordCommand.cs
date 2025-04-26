@@ -4,6 +4,6 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.UserFeature.Commands
 {
-    public record ForgotPasswordCommand(ForgotPasswordDTO PasswordDTO) : IRequest<AuthResponse>;
-    public record ResetPasswordCommand(ResetPasswordDTO PasswordDTO) : IRequest<AuthResponse>;
+    public record ForgotPasswordCommand(ForgotPasswordDto PasswordDTO) : IRequest<AuthResponse>;
+    public record ResetPasswordCommand(ResetPasswordDto PasswordDTO) : IRequest<AuthResponse>;
 }

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Queries.Requests;
 
-public sealed record GetPublisherByEmailQuery(string Email): IRequest<BaseResponse<PublisherDTO>>;
+public sealed record GetPublisherByEmailQuery(string Email): IRequest<BaseResponse<PublisherDto>>;

@@ -66,7 +66,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
         
         [HttpPost("CreatePublisher")]
-        public async Task<IActionResult> CreatePublisher([FromBody] PublisherDTO publisherDto)
+        public async Task<IActionResult> CreatePublisher([FromBody] PublisherDto publisherDto)
         {
             var result = await Mediator.Send(new CreatePublisherCommand(publisherDto));
             
@@ -74,7 +74,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
 
         [HttpPost("CreateRangePublisher")]
-        public async Task<IActionResult> CreateRangePublisher([FromBody] IEnumerable<PublisherDTO> publisherDtos)
+        public async Task<IActionResult> CreateRangePublisher([FromBody] IEnumerable<PublisherDto> publisherDtos)
         {
             var result = await Mediator.Send(new CreatePublishersRangeCommand(publisherDtos));
             

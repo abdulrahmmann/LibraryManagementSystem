@@ -18,12 +18,12 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateBookCommandHandler> _logger;
-    private readonly IValidator<BookDTO> _validator;
+    private readonly IValidator<CreateBookDto> _validator;
     #endregion
 
     #region INJECT INSTANCES INTO CONSTRUCTOR
     public CreateBookCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
-        ILogger<CreateBookCommandHandler> logger, IValidator<BookDTO> validator)
+        ILogger<CreateBookCommandHandler> logger, IValidator<CreateBookDto> validator)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -36,25 +36,25 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
     {
         try
         {
-            if (request.BookDto is null)
+            if (request.CreateBookDto is null)
             {
                 _logger.LogWarning("request can not be null!");
                 return BaseResponse<bool>.ErrorResponse("request can not be null!");
             }
 
-            var isExist = _unitOfWork.BookRepository.IsExistingBook(request.BookDto.Title);
+            var isExist = _unitOfWork.BookRepository.IsExistingBook(request.CreateBookDto.Title);
 
             if (isExist)
             {
-                _logger.LogWarning("Book with Title: {Title} already exists", request.BookDto.Title);
-                return BaseResponse<bool>.ConflictResponse($"Book with Title: {request.BookDto.Title} Is Already Exist!!");
+                _logger.LogWarning("Book with Title: {Title} already exists", request.CreateBookDto.Title);
+                return BaseResponse<bool>.ConflictResponse($"Book with Title: {request.CreateBookDto.Title} Is Already Exist!!");
             }
 
-            var author = _unitOfWork.AuthorRepository.GetAuthorByNameAsync(request.BookDto.AuthorName);
-            var genre = _unitOfWork.GenreRepository.GetGenreByNameAsync(request.BookDto.GenreName);
-            var publisher = _unitOfWork.PublisherRepository.GetPublisherByNameAsync(request.BookDto.PublisherName);
+            var author = _unitOfWork.AuthorRepository.GetAuthorByNameAsync(request.CreateBookDto.AuthorName);
+            var genre = _unitOfWork.GenreRepository.GetGenreByNameAsync(request.CreateBookDto.GenreName);
+            var publisher = _unitOfWork.PublisherRepository.GetPublisherByNameAsync(request.CreateBookDto.PublisherName);
             
-            var validationResult = await _validator.ValidateAsync(request.BookDto, cancellationToken);
+            var validationResult = await _validator.ValidateAsync(request.CreateBookDto, cancellationToken);
 
             if (!validationResult.IsValid)
             {
@@ -67,7 +67,7 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
             {
                 var newAuthor = new Author
                 {
-                    Name = request.BookDto.AuthorName
+                    Name = request.CreateBookDto.AuthorName
                 };
                 await _unitOfWork.AuthorRepository.AddAuthorAsync(newAuthor);
                 await _unitOfWork.SaveChangesAsync();
@@ -77,13 +77,13 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
             {
                 var newPublisher = new Publisher
                 {
-                    Name = request.BookDto.PublisherName
+                    Name = request.CreateBookDto.PublisherName
                 };
                 await _unitOfWork.PublisherRepository.AddPublisherAsync(newPublisher);
                 await _unitOfWork.SaveChangesAsync();
             }
 
-            var req = request.BookDto;
+            var req = request.CreateBookDto;
             
             var newBook = new Book
             {
@@ -92,7 +92,7 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
                 PublishedDate = req.PublishedDate,
                 NumberOfPages = req.NumberOfPages,
                 Edition = req.Edition,
-                ISPN = req.ISPN,
+                Isbn = req.Isbn,
                 CoverColor = req.CoverColor,
                 BookCoverImage = req.BookCoverImage,
                 AuthorId = author!.Id,
@@ -103,9 +103,11 @@ public class CreateBookCommandHandler: IRequestHandler<CreateBookCommand, BaseRe
             
             await _unitOfWork.SaveChangesAsync();
             
-            _logger.LogInformation("Book created with Title: {Title}", request.BookDto.Title);
+            
+            
+            _logger.LogInformation("Book created with Title: {Title}", request.CreateBookDto.Title);
 
-            return BaseResponse<bool>.CreatedResponse(true, $"Book with Title `{request.BookDto.Title}` created successfully");
+            return BaseResponse<bool>.CreatedResponse(true, $"Book with Title `{request.CreateBookDto.Title}` created successfully");
         }
         catch (Exception e)
         {

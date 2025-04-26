@@ -14,7 +14,7 @@
 
         public int Edition { get; set; }
 
-        public string ISPN { get; set; } = string.Empty;
+        public string Isbn { get; set; } = string.Empty;
 
         public string CoverColor { get; set; } = string.Empty;
 

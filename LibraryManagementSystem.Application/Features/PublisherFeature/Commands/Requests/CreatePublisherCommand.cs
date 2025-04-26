@@ -4,4 +4,4 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.PublisherFeature.Commands.Requests;
 
-public sealed record CreatePublisherCommand(PublisherDTO PublisherDto): IRequest<BaseResponse<bool>>;
+public sealed record CreatePublisherCommand(PublisherDto PublisherDto): IRequest<BaseResponse<bool>>;

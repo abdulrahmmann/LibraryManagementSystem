@@ -4,5 +4,5 @@ using MediatR;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public record FilterAuthorByNameQuery(string searchName) : IRequest<BaseResponse<IQueryable<AuthorDTO>>>;
+    public record FilterAuthorByNameQuery(string searchName) : IRequest<BaseResponse<IQueryable<AuthorDto>>>;
 }

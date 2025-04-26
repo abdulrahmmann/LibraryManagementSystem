@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
 {
-    public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, BaseResponse<IEnumerable<AuthorDTO>>>
+    public class GetAllAuthorsQueryHandler : IRequestHandler<GetAllAuthorsQuery, BaseResponse<IEnumerable<AuthorDto>>>
     {
         #region INSTANCE FIELDS
         private readonly IUnitOfWork _unitOfWork;
@@ -27,7 +27,7 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
         #endregion
 
 
-        public async Task<BaseResponse<IEnumerable<AuthorDTO>>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<IEnumerable<AuthorDto>>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -37,25 +37,25 @@ namespace LibraryManagementSystem.Application.Features.AuthorFeature.Queries
                 {
                     _logger.LogWarning("Authors Is Null or Empty!");
 
-                    return BaseResponse<IEnumerable<AuthorDTO>>.NoContentResponse("Authors Is Null or Empty!");
+                    return BaseResponse<IEnumerable<AuthorDto>>.NoContentResponse("Authors Is Null or Empty!");
                 }
 
-                var authorsDto = _mapper.Map<IEnumerable<AuthorDTO>>(authors);
+                var authorsDto = _mapper.Map<IEnumerable<AuthorDto>>(authors);
 
                 if (authorsDto == null || !authorsDto.Any())
                 {
                     _logger.LogWarning("Authors DTO Is Null or Empty!");
 
-                    return BaseResponse<IEnumerable<AuthorDTO>>.NoContentResponse("Authors DTO Is Null or Empty!");
+                    return BaseResponse<IEnumerable<AuthorDto>>.NoContentResponse("Authors DTO Is Null or Empty!");
                 }
 
-                return BaseResponse<IEnumerable<AuthorDTO>>.SuccessResponse(authorsDto, "Successfully Retrieving All Authors");
+                return BaseResponse<IEnumerable<AuthorDto>>.SuccessResponse(authorsDto, "Successfully Retrieving All Authors");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while Retrieving authors.");
 
-                return BaseResponse<IEnumerable<AuthorDTO>>.InternalServerErrorResponse("An unexpected error occurred.");
+                return BaseResponse<IEnumerable<AuthorDto>>.InternalServerErrorResponse("An unexpected error occurred.");
             }
         }
     }

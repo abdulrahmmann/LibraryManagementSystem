@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Api.Controllers
     public class GenreController : AppControllerBase
     {
         [HttpPost("CreateGenre")]
-        public async Task<IActionResult> CreateGenreRange([FromBody] GenreDTO genreDto)
+        public async Task<IActionResult> CreateGenreRange([FromBody] GenreDto genreDto)
         {
             var result = await Mediator.Send(new CreateGenreCommand(genreDto));
 
@@ -18,7 +18,7 @@ namespace LibraryManagementSystem.Api.Controllers
         }
         
         [HttpPost("CreateGenreRange")]
-        public async Task<IActionResult> CreateGenre([FromBody] IEnumerable<GenreDTO> genreDtos)
+        public async Task<IActionResult> CreateGenre([FromBody] IEnumerable<GenreDto> genreDtos)
         {
             var result = await Mediator.Send(new CreateGenreRangeCommand(genreDtos));
 
